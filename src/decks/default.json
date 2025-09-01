@@ -1,0 +1,10 @@
+{
+	"title": "Default",
+	"cards": [
+		{
+			"question": "Explain the modern React component lifecycle without classes.",
+			"answer": "With hooks: mount (useEffect with []), updates (useEffect with deps), unmount (cleanup). Avoid setState in render; use memo/useMemo/useCallback.",
+			"tags": ["technical","React"]
+		}
+	]
+}
