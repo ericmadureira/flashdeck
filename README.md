@@ -1,69 +1,26 @@
-# React + TypeScript + Vite
+# FlashDeck — Interview Flashcards (React + Vite + TS)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Study technical, behavioral, and situational questions. Filter by tags, search, shuffle, favorite, import/export JSON. Works 100% in the browser.
 
-Currently, two official plugins are available:
+▶️ **Online demo:** https://<USER>.github.io/<REPO>
+💻 **Run locally:** `npm i && npm run dev`
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## Use now
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 1) Online (no installation required)
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- Open: **https://<USER>.github.io/<REPO>**
+- Click **Import** to load your `.json`
+- Use **←/→** to navigate, **Space** to flip, **S** to shuffle, **F** to favorite, **1–4** to feedback
+- **Export** to save your deck in `.json`
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+### 2) Local (dev)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+```bash
+git clone https://github.com/<USER>/<REPO>.git
+cd <REPO>
+npm i
+npm run dev
+# open in http://localhost:5173
