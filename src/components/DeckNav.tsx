@@ -5,9 +5,9 @@ interface DeckNavProps {
 
 const DeckNav = ({ previousCard, nextCard }: DeckNavProps) => {
 	return (
-		<div className="flex max-w-60 justify-around mt-4">
+		<div className="flex max-w-60 justify-start mt-4">
 			<button onClick={previousCard} className="border px-2 py-1 cursor-pointer">⬅</button>
-			<button onClick={nextCard} className="border px-2 py-1 cursor-pointer">➡</button>
+			<button onClick={nextCard} className="border ml-12 px-2 py-1 cursor-pointer">➡</button>
 		</div>
 	)
 }

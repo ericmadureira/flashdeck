@@ -11,7 +11,7 @@ function Card({ question, answer }: CardProps) {
 	const toggleAnswer = () => setVisibleAnswer(!visibleAnswer)
 	return (
 		<div
-			className='border rounded-lg text-center max-w-60 cursor-pointer mt-4 p-4 text-pretty'
+			className='border rounded-lg text-center w-60 cursor-pointer mt-4 p-4 text-pretty'
 			onClick={toggleAnswer}
 		>
 			<div className='max-w-60'>

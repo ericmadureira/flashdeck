@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+@layer base {
+  h1 { @apply text-3xl font-bold; }
+  h2 { @apply text-xl font-semibold; }
+}
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
