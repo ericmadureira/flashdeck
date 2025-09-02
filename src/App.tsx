@@ -4,7 +4,7 @@ import Card from './components/Card'
 import DeckNav from './components/DeckNav'
 
 function App() {
-  const [selectedDeck, setSelectedDeck] = useState(defaultDeck)
+  const [selectedDeck] = useState(defaultDeck)
 	const [currentCardIdx, setCurrentCardIdx] = useState(0)
 	let currentCard = selectedDeck.cards[currentCardIdx]
 	const previousCard = () => {
