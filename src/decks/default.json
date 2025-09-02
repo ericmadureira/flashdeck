@@ -4,7 +4,211 @@
 		{
 			"question": "Explain the modern React component lifecycle without classes.",
 			"answer": "With hooks: mount (useEffect with []), updates (useEffect with deps), unmount (cleanup). Avoid setState in render; use memo/useMemo/useCallback.",
-			"tags": ["technical","React"]
+			"tags": ["Technical", "React"]
+		},
+		{
+			"question": "Difference between state and props in React?",
+			"answer": "Props are read-only inputs from parent; state is internal, owned by the component and updated via setState/useState.",
+			"tags": ["Technical","React"]
+		},
+		{
+			"question": "Why are keys important in React lists?",
+			"answer": "They give stable identity so React can diff/move items instead of recreating; avoid index when list can reorder.",
+			"tags": ["Technical","React"]
+		},
+		{
+			"question": "When should you useContext vs prop drilling?",
+			"answer": "Use context to share values across many levels (theme, auth) to avoid drilling; not for every piece of state.",
+			"tags": ["Technical","React"]
+		},
+		{
+			"question": "useMemo vs useCallback?",
+			"answer": "useMemo memoizes a computed VALUE; useCallback memoizes a FUNCTION reference.",
+			"tags": ["Technical","React"]
+		},
+		{
+			"question": "What causes an infinite render loop with useEffect?",
+			"answer": "Updating state inside an effect without proper dependency array; effect re-runs on each state change.",
+			"tags": ["Technical","React"]
+		},
+		{
+			"question": "Controlled vs uncontrolled inputs?",
+			"answer": "Controlled: value comes from state and onChange updates it. Uncontrolled: DOM keeps value, accessed via ref.",
+			"tags": ["Technical","React","Forms"]
+		},
+		{
+			"question": "What is React reconciliation?",
+			"answer": "The diffing process that compares virtual DOM trees and applies minimal updates to the real DOM.",
+			"tags": ["Technical","React"]
+		},
+		{
+			"question": "What is Suspense used for?",
+			"answer": "To declaratively wait for async data/code and show fallbacks; pairs well with lazy() and data frameworks.",
+			"tags": ["Technical","React"]
+		},
+		{
+			"question": "How to avoid prop drilling without context?",
+			"answer": "Lift state up to a common parent, or use composition patterns (children render props), or a state manager.",
+			"tags": ["Technical","React"]
+		},
+		{
+			"question": "Common causes of 'Cannot update a component while rendering a different component'?",
+			"answer": "Calling setState during render of another component; move to effects, event handlers, or use layout effects carefully.",
+			"tags": ["Technical","React"]
+		},
+
+		{
+			"question": "var vs let vs const?",
+			"answer": "var is function-scoped and hoisted; let/const are block-scoped; const prevents reassignment (not mutation).",
+			"tags": ["Technical","JavaScript"]
+		},
+		{
+			"question": "Undefined vs null?",
+			"answer": "undefined = not assigned; null = intentional empty value. typeof null is 'object' (historical quirk).",
+			"tags": ["Technical","JavaScript"]
+		},
+		{
+			"question": "What does 'this' depend on in JS?",
+			"answer": "Call-site. Determined by how a function is called (bind/call/apply, method call, constructor, arrow functions).",
+			"tags": ["Technical","JavaScript"]
+		},
+		{
+			"question": "Event loop: microtasks vs macrotasks?",
+			"answer": "Microtasks (Promises) run before next rendering; macrotasks (setTimeout) run after; order affects timing.",
+			"tags": ["Technical","JavaScript","Performance"]
+		},
+		{
+			"question": "Why use optional chaining and nullish coalescing?",
+			"answer": "To safely access deep props (?.) and default only when null/undefined (??), not on falsy like 0 or ''.",
+			"tags": ["Technical","JavaScript"]
+		},
+		{
+			"question": "What is a pure function?",
+			"answer": "No side effects and deterministic output for same inputs; easier to test and memoize.",
+			"tags": ["Technical","JavaScript"]
+		},
+		{
+			"question": "Difference between == and ===?",
+			"answer": "=== checks value and type (no coercion); == allows type coercion and can surprise.",
+			"tags": ["Technical","JavaScript"]
+		},
+		{
+			"question": "What are generators useful for?",
+			"answer": "Pause/resume functions (yield) for iterators, async flow control, and lazy sequences.",
+			"tags": ["Technical","JavaScript"]
+		},
+		{
+			"question": "What is tree-shaking?",
+			"answer": "Static analysis to remove unused exports during bundling, reducing bundle size.",
+			"tags": ["Technical","JavaScript","Performance","Bundling"]
+		},
+		{
+			"question": "Deep copy vs shallow copy?",
+			"answer": "Shallow copies share nested references; deep copies duplicate all levels (e.g., structuredClone).",
+			"tags": ["Technical","JavaScript"]
+		},
+
+		{
+			"question": "TypeScript: any vs unknown vs never?",
+			"answer": "any disables type checking; unknown is safe-any requiring narrowing; never = no value returned/possible.",
+			"tags": ["Technical","TypeScript"]
+		},
+		{
+			"question": "What is type narrowing?",
+			"answer": "Refining a union to a specific type via typeof, instanceof, in, equality checks, or custom predicates.",
+			"tags": ["Technical","TypeScript"]
+		},
+		{
+			"question": "Interface vs type alias?",
+			"answer": "Interfaces merge/extend; types are more general (unions, mapped types). Prefer interface for object shapes.",
+			"tags": ["Technical","TypeScript"]
+		},
+		{
+			"question": "What is a discriminated union?",
+			"answer": "Union with a common literal 'tag' property that enables safe exhaustive switches.",
+			"tags": ["Technical","TypeScript"]
+		},
+		{
+			"question": "When to use generics?",
+			"answer": "Reusable components/functions that preserve type info of inputs/collections, e.g., Array<T>.",
+			"tags": ["Technical","TypeScript"]
+		},
+		{
+			"question": "What is declaration merging?",
+			"answer": "TypeScript merges multiple declarations (e.g., interfaces, namespaces) with the same name into one type.",
+			"tags": ["Technical","TypeScript"]
+		},
+
+		{
+			"question": "Block vs inline vs inline-block?",
+			"answer": "Block breaks line and takes full width; inline flows in text (no width/height); inline-block allows size without line break.",
+			"tags": ["Technical","CSS","Layout"]
+		},
+		{
+			"question": "Specificity rules in CSS?",
+			"answer": "Inline > ID > class/attr/pseudo-class > element/pseudo-element; later ties win; !important overrides.",
+			"tags": ["Technical","CSS"]
+		},
+		{
+			"question": "What is stacking context?",
+			"answer": "A new z-index context created by positioned elements, opacity <1, transforms, etc.; affects layering.",
+			"tags": ["Technical","CSS","Layout"]
+		},
+		{
+			"question": "Flexbox vs Grid use cases?",
+			"answer": "Flexbox for 1-D rows/columns; Grid for 2-D layouts with rows and columns.",
+			"tags": ["Technical","CSS","Layout"]
+		},
+		{
+			"question": "How to center a div horizontally and vertically?",
+			"answer": "Flex: justify-center items-center; or Grid: place-items-center; on a container with full size.",
+			"tags": ["Technical","CSS","Layout"]
+		},
+		{
+			"question": "What is content-visibility: auto?",
+			"answer": "Skips rendering off-screen content to improve performance; maintains layout boxes.",
+			"tags": ["Technical","CSS","Performance"]
+		},
+
+		{
+			"question": "What are Core Web Vitals?",
+			"answer": "LCP (loading), INP (interactivity), CLS (visual stability). Optimize images, JS, and layout stability.",
+			"tags": ["Technical","Frontend","Performance"]
+		},
+		{
+			"question": "Client-side vs server-side rendering trade-offs?",
+			"answer": "CSR: quick nav, heavy initial JS; SSR: faster first paint/SEO, needs server and caching.",
+			"tags": ["Technical","Frontend","Architecture"]
+		},
+		{
+			"question": "What is ETag and 304 Not Modified?",
+			"answer": "ETag is a resource fingerprint; server returns 304 when unchanged to save bandwidth.",
+			"tags": ["Technical","Frontend","HTTP","Caching"]
+		},
+		{
+			"question": "How to prevent XSS in a React app?",
+			"answer": "Escape by default, avoid dangerouslySetInnerHTML, sanitize user HTML, use Content Security Policy.",
+			"tags": ["Technical","Frontend","Security"]
+		},
+		{
+			"question": "How do Service Workers help performance?",
+			"answer": "Enable offline caching/route handling; precache critical assets; serve from cache first.",
+			"tags": ["Technical","Frontend","PWA","Performance"]
+		},
+		{
+			"question": "When to debounce vs throttle?",
+			"answer": "Debounce after inactivity (search input); throttle at fixed intervals (scroll/resize handlers).",
+			"tags": ["Technical","Frontend","Performance"]
+		},
+		{
+			"question": "What is accessibility’s focus order and how to manage it?",
+			"answer": "Logical DOM order + tabindex; avoid positive tabindex; manage focus on route/modal changes.",
+			"tags": ["Technical","Frontend","Accessibility"]
+		},
+		{
+			"question": "How to test React components effectively?",
+			"answer": "Use React Testing Library for behavior over implementation; mock boundaries; test accessibility roles.",
+			"tags": ["Technical","Frontend","Testing"]
 		}
 	]
 }
