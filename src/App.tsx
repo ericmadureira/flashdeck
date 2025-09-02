@@ -21,7 +21,9 @@ function App() {
 	}
 
   return (
-    <div className='flex flex-col text-center'>
+    <div className='flex flex-col items-center text-center'>
+			<h1 className='mt-4'>FlashDeck</h1>
+			<h2><a href="https://github.com/ericmadureira/flashdeck" target='_blank'>by ➡ Eric Madureira</a></h2>
 			<p className='mt-8'>Deck title: { selectedDeck.title }</p>
 			<DeckNav previousCard={previousCard} nextCard={nextCard} />
 			<Card key={currentCard.question} question={currentCard.question} answer={currentCard.answer} />
