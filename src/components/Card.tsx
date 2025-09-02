@@ -11,15 +11,18 @@ function Card({ question, answer }: CardProps) {
 	const toggleAnswer = () => setVisibleAnswer(!visibleAnswer)
 	return (
 		<div
-			className='border rounded-lg text-center
-			max-w-56 cursor-pointer mt-8'
+			className='border rounded-lg text-center max-w-60 cursor-pointer mt-4 p-4 text-pretty'
 			onClick={toggleAnswer}
 		>
-			<span className='text-center'>Question:</span>
-			<p> { question }</p>
-			<hr />
-			<span>Answer: </span>
-			<p>{ visibleAnswer && answer }</p>
+			<div className='max-w-60'>
+				<span className='text-center'>Question:</span>
+				<p className='wrap-anywhere font-bold mt-4'>{ question }</p>
+			</div>
+			<hr className='mt-4 mb-4' />
+			<div className='max-w-60'>
+				<span>Answer: </span>
+				<p className='wrap-anywhere font-bold mt-4'>{ visibleAnswer && answer }</p>
+			</div>
 		</div>
 	)
 }
