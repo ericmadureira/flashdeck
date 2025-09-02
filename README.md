@@ -2,7 +2,7 @@
 
 Study technical, behavioral, and situational questions. Filter by tags, search, shuffle, favorite, import/export JSON. Works 100% in the browser.
 
-▶️ **Online demo:** https://<USER>.github.io/<REPO>
+▶️ **Online demo:** <https://ericmadureira.github.io/flashdeck>
 💻 **Run locally:** `npm i && npm run dev`
 
 ---
@@ -11,7 +11,7 @@ Study technical, behavioral, and situational questions. Filter by tags, search, 
 
 ### 1) Online (no installation required)
 
-- Open: **https://<USER>.github.io/<REPO>**
+- Open: **<https://ericmadureira.github.io/flashdeck>**
 - Click **Import** to load your `.json`
 - Use **←/→** to navigate, **Space** to flip, **S** to shuffle, **F** to favorite, **1–4** to feedback
 - **Export** to save your deck in `.json`
