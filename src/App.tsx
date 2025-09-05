@@ -22,9 +22,10 @@ function App() {
 
   return (
     <div className='flex flex-col items-center text-center'>
-			<h1 className='mt-4'>FlashDeck</h1>
-			<h2><a href="https://github.com/ericmadureira/flashdeck" target='_blank'>by ➡ Eric Madureira</a></h2>
-			<p className='mt-8'>Deck title: { selectedDeck.title }</p>
+			<h1 className='mt-4 text-[#38BDF8]'>FlashDeck</h1>
+			<h3><a href="https://github.com/ericmadureira/flashdeck" target='_blank' className='underline'>by ➡ Eric Madureira</a></h3>
+			<p className='mt-8 text-xl'>Deck title:</p>
+			<p className='text-xl'>{ selectedDeck.title }</p>
 			<DeckNav previousCard={previousCard} nextCard={nextCard} />
 			<Card key={currentCard.question} question={currentCard.question} answer={currentCard.answer} />
     </div>

@@ -15,13 +15,13 @@ function Card({ question, answer }: CardProps) {
 			onClick={toggleAnswer}
 		>
 			<div className='max-w-60'>
-				<span className='text-center'>Question:</span>
-				<p className='wrap-anywhere font-bold mt-4'>{ question }</p>
+				<span className='text-center text-[#FACC15]'>Question:</span>
+				<p className='wrap-anywhere font-semibold mt-4'>{ question }</p>
 			</div>
 			<hr className='mt-4 mb-4' />
 			<div className='max-w-60'>
-				<span>Answer: </span>
-				<p className='wrap-anywhere font-bold mt-4'>{ visibleAnswer && answer }</p>
+				<span className='text-lg text-[#F97316]'>{ visibleAnswer ? 'Answer' : '👆🏽 Tap for answer' }</span>
+				<p className='wrap-anywhere font-semibold mt-4 text-lg text-[#38BDF8]'>{ visibleAnswer && answer }</p>
 			</div>
 		</div>
 	)
