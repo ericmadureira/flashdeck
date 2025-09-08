@@ -1,0 +1,241 @@
+{
+	"id": "backend",
+  "title": "Backend + Node + TS + Nest + Express",
+  "cards": [
+    {
+      "question": "JWT vs Session Cookies — when to choose each?",
+      "answer": "Sessions store state server-side (cookie holds session id). JWT is stateless and self-contained. Sessions simplify revocation/rotation; JWT scales horizontally but needs short TTL+refresh and careful invalidation.",
+      "tags": ["Technical","Auth","Security","Node"]
+    },
+    {
+      "question": "Access token vs Refresh token best practices?",
+      "answer": "Short-lived access tokens; long-lived refresh tokens stored in httpOnly+SameSite cookies. Rotate refresh tokens on use, detect reuse, and revoke the entire chain ('token rotation').",
+      "tags": ["Technical","Auth","Security"]
+    },
+    {
+      "question": "How to mitigate CSRF in cookie-based auth?",
+      "answer": "Use SameSite=Lax/Strict, double-submit or synchronizer token, and verify origin via CSRF token header; avoid enabling CORS '*' with credentials.",
+      "tags": ["Technical","Security","Auth","Web"]
+    },
+    {
+      "question": "CORS — what is it and a safe default?",
+      "answer": "Browser protection that restricts cross-origin requests. Allow only known origins, specific methods/headers, and set credentials=true only when needed; never use '*' with credentials.",
+      "tags": ["Technical","Security","Web"]
+    },
+    {
+      "question": "OAuth 2.1/2.0 — safest flow for SPAs?",
+      "answer": "Authorization Code with PKCE. No client secret in the browser; token exchange happens server-side or via a BFF.",
+      "tags": ["Technical","Auth","Security"]
+    },
+    {
+      "question": "Password storage best practice?",
+      "answer": "Use slow KDFs (bcrypt, scrypt, Argon2) with per-user salt; optional 'pepper' via server-side secret; enforce policies + rate limiting.",
+      "tags": ["Technical","Security","Auth"]
+    },
+    {
+      "question": "Rate limiting strategies you’d implement?",
+      "answer": "Token bucket/leaky bucket per IP/user+route, backed by Redis. Add burst limits, global failsafe, and shadow mode before enforcing.",
+      "tags": ["Technical","Security","Performance"]
+    },
+    {
+      "question": "Idempotency for POST endpoints — how?",
+      "answer": "Require an Idempotency-Key header, store result keyed by (key+user+route) with TTL; return the same result on retry; include request hash to detect body changes.",
+      "tags": ["Technical","API","Reliability"]
+    },
+    {
+      "question": "SQL vs NoSQL — when would you choose each?",
+      "answer": "SQL for relational constraints, transactions, reporting. NoSQL for high write throughput, flexible schema, or large-scale KV/doc workloads. Many systems are polyglot.",
+      "tags": ["Technical","Database","Architecture"]
+    },
+    {
+      "question": "Composite index order — what matters?",
+      "answer": "Place most selective/leading filter first; index must match leftmost prefix of the query. Avoid redundant indexes; cover queries to reduce lookups.",
+      "tags": ["Technical","Database","Performance"]
+    },
+    {
+      "question": "How to avoid N+1 queries with an ORM?",
+      "answer": "Use eager loading/joins/select-in, dataloader batching for GraphQL, and inspect query logs; project only required columns.",
+      "tags": ["Technical","Database","Performance"]
+    },
+    {
+      "question": "Transaction isolation levels and common anomalies?",
+      "answer": "Read Committed (no dirty reads), Repeatable Read (no nonrepeatable), Serializable (no phantoms). Choose per use-case; Postgres RR prevents nonrepeatable but may allow phantoms via gaps.",
+      "tags": ["Technical","Database"]
+    },
+    {
+      "question": "Optimistic vs pessimistic locking?",
+      "answer": "Optimistic uses version/timestamp and retries on conflict; pessimistic uses row locks to prevent concurrent writes; choose based on contention profile.",
+      "tags": ["Technical","Database","Concurrency"]
+    },
+    {
+      "question": "Zero-downtime migrations strategy?",
+      "answer": "Expand→Migrate→Contract: add nullable/duplicate columns, backfill in batches, switch reads/writes, then drop old schema; guard code for dual writes during transition.",
+      "tags": ["Technical","Database","DevOps"]
+    },
+    {
+      "question": "Cache-aside vs write-through vs write-back?",
+      "answer": "Cache-aside: app reads cache, misses then DB+set. Write-through: writes go to cache then DB. Write-back: write to cache and flush later (riskier, needs WAL).",
+      "tags": ["Technical","Caching","Performance"]
+    },
+    {
+      "question": "Event streaming vs message queue — difference?",
+      "answer": "Queues (RabbitMQ/SQS) deliver to consumers once; streams (Kafka) keep history and allow multiple consumer groups reading at their own pace.",
+      "tags": ["Technical","Architecture","Messaging"]
+    },
+    {
+      "question": "Exactly-once delivery — realistic approach?",
+      "answer": "Aim for at-least-once + idempotent consumers using keys or dedupe tables; use transactions/outbox for producer consistency.",
+      "tags": ["Technical","Reliability","Messaging"]
+    },
+    {
+      "question": "Node event loop vs libuv thread pool — why care?",
+      "answer": "Event loop handles non-blocking I/O; CPU or blocking tasks should go to worker threads or the libuv pool (fs/crypto/dns). Avoid blocking the loop.",
+      "tags": ["Technical","Node","Performance"]
+    },
+    {
+      "question": "Backpressure with Node streams?",
+      "answer": "Use pipe() and respect highWaterMark; pause/resume or await drain events; never buffer unbounded.",
+      "tags": ["Technical","Node","Performance"]
+    },
+    {
+      "question": "Worker Threads vs Cluster vs child_process?",
+      "answer": "Worker Threads for CPU-bound tasks in-process; Cluster to scale HTTP across cores; child_process for external commands or isolation.",
+      "tags": ["Technical","Node","Architecture"]
+    },
+    {
+      "question": "Graceful shutdown in Node/Nest?",
+      "answer": "Listen to SIGTERM/SIGINT, stop accepting new connections, await server.close, drain queues, disconnect DB/Redis, and set a hard timeout fallback.",
+      "tags": ["Technical","Node","DevOps"]
+    },
+    {
+      "question": "Debugging memory leaks in Node — how?",
+      "answer": "Look for unbounded caches, timers/listeners not cleared, global refs. Take heap snapshots, use clinic/pprof, track object retainers.",
+      "tags": ["Technical","Node","Performance"]
+    },
+    {
+      "question": "Handling large file uploads safely?",
+      "answer": "Stream to storage (S3) instead of buffering, set size limits, scan/validate MIME, and protect temp dirs; consider pre-signed URLs.",
+      "tags": ["Technical","Security","Performance"]
+    },
+    {
+      "question": "Structured logging and correlation IDs?",
+      "answer": "Emit JSON logs with levels and request IDs; propagate correlation IDs across services and include them in traces (OpenTelemetry).",
+      "tags": ["Technical","Observability","Logging"]
+    },
+    {
+      "question": "12-factor config & secrets management?",
+      "answer": "Store config in env vars, separate build/run stages, and use a secret manager (Vault/SSM); never commit secrets.",
+      "tags": ["Technical","DevOps","Security"]
+    },
+    {
+      "question": "REST API design — status codes & errors?",
+      "answer": "Use resource nouns, proper codes (200/201/204/400/401/403/404/409/422/429/5xx), consistent error shape (problem+json) and validation messages.",
+      "tags": ["Technical","API","Architecture"]
+    },
+    {
+      "question": "Pagination — offset vs cursor?",
+      "answer": "Offset is simple but slow/incorrect with mutations; cursor (by stable sort key) is faster and consistent for large datasets.",
+      "tags": ["Technical","API","Database","Performance"]
+    },
+    {
+      "question": "Global error handling in Express?",
+      "answer": "Use an error-handling middleware (err, req, res, next), never throw unhandled promises; map errors to consistent responses.",
+      "tags": ["Technical","Express","API"]
+    },
+    {
+      "question": "NestJS building blocks?",
+      "answer": "Modules organize providers; providers are injectable services; controllers handle routes. DI container manages scopes.",
+      "tags": ["Technical","NestJS","Architecture"]
+    },
+    {
+      "question": "Nest — Guards vs Interceptors vs Filters vs Pipes?",
+      "answer": "Guards authorize; Pipes validate/transform DTOs; Interceptors wrap execution (logging, mapping); Filters catch exceptions globally/per-route.",
+      "tags": ["Technical","NestJS","Architecture"]
+    },
+    {
+      "question": "When to use request-scoped providers in Nest?",
+      "answer": "When state must be unique per request (e.g., correlation ID). Use sparingly due to cost; prefer passing context explicitly.",
+      "tags": ["Technical","NestJS","Performance"]
+    },
+    {
+      "question": "Express middleware order pitfalls?",
+      "answer": "Order matters: parsing, security (helmet/cors), auth, routers, then error handler. Missed order breaks auth/body or CORS.",
+      "tags": ["Technical","Express","Security"]
+    },
+    {
+      "question": "Security headers you should enable?",
+      "answer": "HSTS, X-Content-Type-Options, X-Frame-Options/Frame-Ancestors, Content-Security-Policy, Referrer-Policy; use Helmet as a baseline.",
+      "tags": ["Technical","Security","Web"]
+    },
+    {
+      "question": "TLS termination & reverse proxies (e.g., Nginx) considerations?",
+      "answer": "Terminate TLS at the proxy, forward x-forwarded-* headers, set trust proxy in Express, and enforce HTTPS redirects/HSTS.",
+      "tags": ["Technical","Security","DevOps"]
+    },
+    {
+      "question": "Background jobs in Node?",
+      "answer": "Use Bull/BullMQ with Redis; configure retries/backoff, idempotent processors, dead-letter queue, and graceful shutdown.",
+      "tags": ["Technical","Node","Queues"]
+    },
+    {
+      "question": "Scheduling — cron vs durable scheduler?",
+      "answer": "Cron is best-effort and stateless; use durable schedulers (Bull delayed jobs, Quartz-like services) for persistence and coordination.",
+      "tags": ["Technical","Queues","Architecture"]
+    },
+    {
+      "question": "Real-time — WebSockets vs SSE?",
+      "answer": "WS is bidirectional; SSE is server→client only and simpler/firewall-friendly. Scale WS with Redis adapter across nodes.",
+      "tags": ["Technical","Realtime","Architecture"]
+    },
+    {
+      "question": "GraphQL vs REST for Node backends?",
+      "answer": "GraphQL: flexible queries and single endpoint; needs caching and N+1 control. REST: simpler caching, clearer resource semantics.",
+      "tags": ["Technical","API","Architecture"]
+    },
+    {
+      "question": "Docker image best practices?",
+      "answer": "Use multi-stage builds, run as non-root, pin versions, minimal base (distroless/alpine), and healthchecks; keep node_modules prod-only.",
+      "tags": ["Technical","DevOps","Security"]
+    },
+    {
+      "question": "Observability — metrics, logs, traces together?",
+      "answer": "Emit RED/USE metrics, structured logs with IDs, and distributed traces (OpenTelemetry). Tie them via correlation IDs.",
+      "tags": ["Technical","Observability","Performance"]
+    },
+    {
+      "question": "Testing pyramid for Node APIs?",
+      "answer": "Many unit tests, fewer integration (DB/HTTP with Supertest), and a thin E2E layer. Mock at boundaries; keep fast CI.",
+      "tags": ["Technical","Testing","API"]
+    },
+    {
+      "question": "API versioning strategies?",
+      "answer": "Path (/v1), header (Accept/Custom), or resource-versioned fields. Provide deprecation headers and sunset policy.",
+      "tags": ["Technical","API","Architecture"]
+    },
+    {
+      "question": "Prisma vs TypeORM — key differences?",
+      "answer": "Prisma: schema-first, great DX, type-safe queries; migrations built-in. TypeORM: decorator/entity-first, more control at runtime; be careful with lazy relations.",
+      "tags": ["Technical","Database","TypeScript"]
+    },
+    {
+      "question": "Handling PII/GDPR basics in a backend?",
+      "answer": "Minimize collection, encrypt in transit/at rest, restrict access, log access, support data export/delete, and document retention.",
+      "tags": ["Technical","Security","Compliance"]
+    },
+    {
+      "question": "Resilience patterns you’d add to HTTP clients?",
+      "answer": "Timeouts, retries with exponential backoff + jitter, circuit breaker, bulkhead isolation, and idempotency for safe retries.",
+      "tags": ["Technical","Reliability","Performance"]
+    },
+    {
+      "question": "Time & clocks — what to watch for?",
+      "answer": "Use UTC in storage, beware DST, handle clock skew in tokens/signatures, and avoid client-supplied timestamps for security decisions.",
+      "tags": ["Technical","Security","Architecture"]
+    },
+    {
+      "question": "Validation in NestJS with class-validator?",
+      "answer": "Apply ValidationPipe globally with whitelist/forbidNonWhitelisted, DTOs with decorators, and transform to types.",
+      "tags": ["Technical","NestJS","API"]
+    }
+  ]
+}
