@@ -1,0 +1,161 @@
+{
+  "id": "system-design",
+  "title": "System Design",
+  "cards": [
+    {
+      "question": "How do you estimate capacity for a new system?",
+      "answer": "Start with requirements and rough math: DAU/MAU, peak QPS (x10 safety for spikes), average object size, read:write ratio, data growth/day, retention. Convert to bandwidth, storage, CPU, and memory. Validate with load tests.",
+      "tags": ["SystemDesign","Capacity","Estimation"]
+    },
+    {
+      "question": "What core components appear in most web-scale architectures?",
+      "answer": "DNS → CDN/Edge → WAF/Rate limit → Load balancer/Reverse proxy → App layer → Caches → Datastores → Asynchronous workers/queues → Observability (logs/metrics/traces) → Admin/feature flags.",
+      "tags": ["Architecture","SystemDesign"]
+    },
+    {
+      "question": "Design a real-time notifications service.",
+      "answer": "Write path: enqueue events, fan-out by topic/user segments, persistence with dedupe. Read path: delivery via push (APNs/FCM), email/SMS, or websockets/SSE. Track delivery/opens, backoff/retry, quiet hours, templating, user preferences.",
+      "tags": ["SystemDesign","Messaging","Realtime"]
+    },
+    {
+      "question": "Design a rate-limiter as a shared infrastructure service.",
+      "answer": "Global + per-tenant limits, sliding window or token bucket counters in Redis, multi-DC replication, consistent hashing for sharding keys, leaky bucket smoothing, headers for remaining quota, shadow mode before enforcement.",
+      "tags": ["SystemDesign","SRE","Infrastructure"]
+    },
+    {
+      "question": "How would you design a feature flag platform?",
+      "answer": "Flags defined in config store; SDKs fetch signed flag snapshots with polling/streaming; targeting rules and percentage rollouts; kill switches; audit logs; evaluation locally with server fallback; multi-env and governance.",
+      "tags": ["Architecture","Platform","Reliability"]
+    },
+    {
+      "question": "Design a scalable URL analytics pipeline (click tracking).",
+      "answer": "Ingest events at edge, buffer (Kafka/Kinesis), stream processing for counters/unique visitors, late-event handling, compact to OLAP store (BigQuery/ClickHouse), downsample for dashboards; privacy filters and PII scrubbing.",
+      "tags": ["SystemDesign","Analytics","Streaming"]
+    },
+    {
+      "question": "How to design an autocomplete service for search?",
+      "answer": "Prefix index or n-gram index; memory-resident trie for hot terms; popularity scores with time decay; language normalization; typo tolerance; per-tenant quotas and latency SLOs; async rebuild pipeline.",
+      "tags": ["Search","Indexing","Performance"]
+    },
+    {
+      "question": "Design a media processing pipeline (images/videos).",
+      "answer": "Upload to object storage via pre-signed URLs; enqueue jobs; workers transcode/resize; store variants and metadata; CDN with smart cache keys; idempotent tasks; virus scanning and content moderation hooks.",
+      "tags": ["SystemDesign","Storage","Workers"]
+    },
+    {
+      "question": "How do you plan multi-tenancy and noisy-neighbor isolation?",
+      "answer": "Per-tenant quotas, connection and concurrency caps, resource pools, shard per tenant or pooled with tenant_id indexed, workload isolation for heavy tenants, and cost attribution.",
+      "tags": ["Architecture","MultiTenant","SRE"]
+    },
+    {
+      "question": "Design a messaging/chat system (1:1 and group).",
+      "answer": "Write path: append-only message store partitioned by conversation; delivery receipts; presence via heartbeat; push notifications; offline sync; encryption at rest; search index for messages; rate limits and abuse protection.",
+      "tags": ["SystemDesign","Realtime","Messaging"]
+    },
+    {
+      "question": "How to approach load shedding under extreme traffic?",
+      "answer": "Prioritize critical endpoints; return 503 quickly; queue limits; drop non-critical work, reduce timeouts, use admission control, degrade gracefully (stale cache), and protect backends with bulkheads and circuit breakers.",
+      "tags": ["Reliability","SRE","Performance"]
+    },
+    {
+      "question": "Design a global read-heavy product catalog.",
+      "answer": "Authoritative write store in one region; async replication to read replicas/edge caches; region-local caches with versioning; search via inverted index; batch import jobs; consistency relaxed for non-critical fields.",
+      "tags": ["SystemDesign","Caching","Geo"]
+    },
+    {
+      "question": "How would you structure APIs for a large product (versioning and evolution)?",
+      "answer": "Clear bounded contexts; stable resource shapes; additive changes first; deprecation windows; compatibility tests in CI; contract testing; separate internal vs public APIs; schema registry for events.",
+      "tags": ["API","Architecture","Evolution"]
+    },
+    {
+      "question": "Design a file sharing system like Dropbox (sync & versioning).",
+      "answer": "Clients watch filesystem; chunked uploads with content hashes; server maintains metadata tree, versions, conflict copies; delta sync; sharing ACLs; trash/restore; dedupe per-chunk; encryption and link permissions.",
+      "tags": ["SystemDesign","Storage","Sync"]
+    },
+    {
+      "question": "How do you decide what to put at the edge (CDN/edge compute)?",
+      "answer": "Static assets, cacheable GET APIs, auth-less personalization via cookies/headers, bot mitigation, request normalization, and lightweight transforms. Keep write-heavy or highly dynamic logic in origin.",
+      "tags": ["CDN","Edge","Performance"]
+    },
+    {
+      "question": "Design a metrics time-series platform.",
+      "answer": "Ingest high-cardinality metrics with tags; write-optimized TSDB (LSM/columnar), downsampling and retention tiers, cardinality control, query engine with rollups; alerting on SLOs; scrape/agent model.",
+      "tags": ["Observability","TSDB","SystemDesign"]
+    },
+    {
+      "question": "How to model a news feed ranking pipeline?",
+      "answer": "Candidate generation (graph/follow/interest), feature store, real-time signals, ranking model, de-duplication, diversity constraints, and feedback loop with online/offline evaluation.",
+      "tags": ["SystemDesign","Ranking","ML"]
+    },
+    {
+      "question": "Design a ride-hailing dispatch system.",
+      "answer": "Location service with geohash; nearest-driver search; surge pricing; matching via score (ETA, driver score); real-time updates via websockets; anti-fraud; eventual consistency with reconciliation events.",
+      "tags": ["SystemDesign","Geo","Realtime"]
+    },
+    {
+      "question": "How do you plan data retention and lifecycle?",
+      "answer": "Tiered storage (hot/warm/cold), TTL by data class, legal-hold exceptions, purge jobs with auditing, compaction, and backfills for schema evolution.",
+      "tags": ["Data","Governance","Storage"]
+    },
+    {
+      "question": "Design a resilient scheduler for delayed jobs.",
+      "answer": "Durable queue with visible-at timestamps, time-wheel or sorted set, worker leasing and renewals, exactly-once via idempotency keys, retry with backoff and DLQ, multi-node leader election.",
+      "tags": ["Scheduling","Queues","Reliability"]
+    },
+    {
+      "question": "What’s your approach to back-of-the-envelope calculations?",
+      "answer": "Break into orders of magnitude: users → requests/user → QPS; object size → bandwidth/storage; CPU per request; cache hit ratios; set generous safety factors and validate with tests.",
+      "tags": ["Estimation","SystemDesign"]
+    },
+    {
+      "question": "Design a multi-region read/write architecture with low latency.",
+      "answer": "Write-local with asynchronous cross-region replication and conflict resolution per entity (CRDTs or last-writer-wins with vector clocks); read-local via replicas; global routing; per-feature consistency choices.",
+      "tags": ["Geo","Consistency","Architecture"]
+    },
+    {
+      "question": "How would you build an experimentation/A/B testing platform?",
+      "answer": "Exposure logging, randomization with unit of assignment (user/session), bucketing/segmentation, guardrails metrics, stats engine, sticky assignment, and quick rollback via feature flags.",
+      "tags": ["Product","Platform","SystemDesign"]
+    },
+    {
+      "question": "Design a service for short-lived ephemeral content (stories).",
+      "answer": "Write-optimized store with TTL, pre-signed upload, edge caches, authorization per viewer list, fan-out on read, and background purge; analytics via event stream.",
+      "tags": ["SystemDesign","Storage","Caching"]
+    },
+    {
+      "question": "How do you handle schema and contract evolution at scale?",
+      "answer": "Backward/forward compatible changes, defaults for new fields, consumer-driven contracts, canary consumers, dual-write/dual-read during migrations, and version pinning if needed.",
+      "tags": ["Evolution","Contracts","Architecture"]
+    },
+    {
+      "question": "Design a location service for ‘nearest X’ queries.",
+      "answer": "Geohash or R-tree index, shard by region, cache popular tiles, precompute cells, paginate by distance, update via heartbeat with smoothing to avoid jitter.",
+      "tags": ["Geo","Indexing","Performance"]
+    },
+    {
+      "question": "What strategy do you use for hot partitions and hotspots?",
+      "answer": "Detect via metrics, add salting/sharding keys, introduce write queues, split partitions, and apply adaptive throttling; pre-warm caches on hotspots.",
+      "tags": ["Scalability","Hotspot","SystemDesign"]
+    },
+    {
+      "question": "Design an event audit trail compliant with privacy requests.",
+      "answer": "Append-only log with immutable storage; index by subject ID; subject erasure via crypto-shredding or keyed encryption; export tooling; strict access controls and retention windows.",
+      "tags": ["Compliance","Privacy","SystemDesign"]
+    },
+    {
+      "question": "How would you design a resilient payment webhook processor?",
+      "answer": "Verify signatures, dedupe by event id, idempotent handlers, exactly-once via outbox or receipts, retries with backoff, DLQ, and alerting on stuck events; dashboards for reconciliation.",
+      "tags": ["SystemDesign","Payments","Reliability"]
+    },
+    {
+      "question": "Design a low-latency leaderboard.",
+      "answer": "Sorted set per board/segment, write-through cache, periodic snapshots to durable store, pagination by rank, anti-cheat validation, and regional boards with merge for global.",
+      "tags": ["SystemDesign","Performance","Storage"]
+    },
+    {
+      "question": "What’s your plan for observability from day one?",
+      "answer": "Define SLIs/SLOs, RED/USE metrics, structured logs with correlation IDs, distributed tracing with sampling, and golden dashboards; alert on symptoms, not causes.",
+      "tags": ["Observability","SRE","SystemDesign"]
+    }
+  ]
+}
