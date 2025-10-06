@@ -1,75 +1,87 @@
 {
-  "question": "CQRS — when is it worth the extra complexity?",
-  "answer": "When read and write workloads have very different needs: high-write commands with strict invariants vs many specialized queries. Benefits: independent scaling, simpler read models. Costs: eventual consistency, more moving parts, and dual models to maintain.",
-  "tags": ["Architecture","CQRS","Pattern"]
-},
-{
-  "question": "Event Sourcing — key benefits and common pitfalls?",
-  "answer": "Benefits: full audit log, easy temporal queries, flexible projections. Pitfalls: rebuilding projections, event schema evolution/upcasting, replay cost, and designing correct aggregates/compensations.",
-  "tags": ["Architecture","EventSourcing","Pattern"]
-},
-{
-  "question": "Domain Events vs Integration Events — what’s the difference?",
-  "answer": "Domain events describe business facts inside a bounded context; integration events are stable, external-facing contracts. Keep domain events private and map them to versioned integration events at boundaries.",
-  "tags": ["Architecture","DDD","Messaging"]
-},
-{
-  "question": "Aggregates and invariants — how do you choose boundaries?",
-  "answer": "An aggregate enforces invariants in a single transaction. Group entities that must change together; keep aggregates small and reference others by ID. Cross-aggregate invariants require sagas.",
-  "tags": ["Architecture","DDD","Consistency"]
-},
-{
-  "question": "Client-side vs server-side service discovery — trade-offs?",
-  "answer": "Client-side (apps pick instances via registry) removes a hop and enables smart client logic; harder to rotate clients. Server-side (LB/proxy picks) centralizes policy/MTLS and is simpler for clients; adds a hop.",
-  "tags": ["Architecture","Networking","Discovery"]
-},
-{
-  "question": "Sidecar & Service Mesh — when to adopt vs keep libraries?",
-  "answer": "Service mesh (Envoy/Istio/Linkerd) offloads MTLS, retries, timeouts, and telemetry to sidecars. Adopt when you need uniform policy across many services. Stick to libs when the fleet is small and ops simplicity matters.",
-  "tags": ["Architecture","Networking","Reliability"]
-},
-{
-  "question": "GraphQL Federation vs single schema vs REST aggregator?",
-  "answer": "Single GraphQL schema is simplest but centralizes ownership. Federation lets teams own subgraphs and compose a gateway. REST aggregator composes JSON from multiple services. Federation adds schema governance and resolver performance concerns.",
-  "tags": ["API","GraphQL","Architecture"]
-},
-{
-  "question": "Async request–reply over messaging — how to design it?",
-  "answer": "Correlate with a request ID, include reply-to topic/queue, set a timeout/TTL, dedupe responses, and define idempotent handlers. Use a saga or workflow if multiple steps must succeed or compensate.",
-  "tags": ["Messaging","Pattern","Reliability"]
-},
-{
-  "question": "Replaying and reprocessing events safely?",
-  "answer": "Make consumers idempotent, keep versioned projections, use checkpoints per consumer group, and support backfill windows. Guard side effects (emails/payments) behind outboxes or feature flags during replay.",
-  "tags": ["EventSourcing","Reliability","Operations"]
-},
-{
-  "question": "Anti-entropy & reconciliation — how to fix drift?",
-  "answer": "Periodic jobs compare authoritative sources (checksums/hashes), enqueue fixes, and emit audit logs. Use reconciliation topics, tombstones for deletes, and metrics to track drift rate.",
-  "tags": ["Consistency","Operations","Reliability"]
-},
-{
-  "question": "2PC vs Sagas — why is 2PC rare at scale?",
-  "answer": "2PC requires a coordinator and locks, hurting availability and throughput. Sagas favor availability with compensations and retries. Use 2PC only within a single tech boundary that natively supports it (e.g., one DB cluster).",
-  "tags": ["Consistency","Transactions","Architecture"]
-},
-{
-  "question": "Lambda vs Kappa architectures (data pipelines)?",
-  "answer": "Lambda splits batch and streaming paths (complex but flexible). Kappa uses a single stream (append-only log) for both real-time and reprocessing. Choose Kappa when a durable log (Kafka) is the source of truth.",
-  "tags": ["Data","Streaming","Architecture"]
-},
-{
-  "question": "Ordering and out-of-order events — practical handling?",
-  "answer": "Partition by key to keep per-key order, use event-time with watermarks and allowed lateness, and design idempotent updates. For cross-key order, store sequence numbers and reconcile asynchronously.",
-  "tags": ["Messaging","Streaming","Reliability"]
-},
-{
-  "question": "Command bus pattern — why and how?",
-  "answer": "Centralizes command handling: validation, auth, idempotency keys, routing to handlers, and metrics. Enables cross-cutting concerns and consistent retries. Keep handlers thin and side-effect boundaries explicit.",
-  "tags": ["Architecture","Pattern","CQRS"]
-},
-{
-  "question": "Embedding vs referencing in document databases?",
-  "answer": "Embed when data is read together and small/immutable; reference when shared across many parents, large, or updated independently. Watch document size limits and write amplification.",
-  "tags": ["Database","Modeling","Architecture"]
+	"id": "architecturePatterns",
+  "title": "Architecture design Patterns",
+  "cards": [
+    {
+      "question": "CQRS — when is it worth the extra complexity?",
+      "answer": "When read and write workloads have very different needs: high-write commands with strict invariants vs many specialized queries. Benefits: independent scaling, simpler read models. Costs: eventual consistency, more moving parts, and dual models to maintain.",
+      "tags": ["Architecture","CQRS","Pattern"]
+    },
+    {
+      "question": "Event Sourcing — key benefits and common pitfalls?",
+      "answer": "Benefits: full audit log, easy temporal queries, flexible projections. Pitfalls: rebuilding projections, event schema evolution/upcasting, replay cost, and designing correct aggregates/compensations.",
+      "tags": ["Architecture","EventSourcing","Pattern"]
+    },
+    {
+      "question": "Domain Events vs Integration Events — what’s the difference?",
+      "answer": "Domain events describe business facts inside a bounded context; integration events are stable, external-facing contracts. Keep domain events private and map them to versioned integration events at boundaries.",
+      "tags": ["Architecture","DDD","Messaging"]
+    },
+    {
+      "question": "Aggregates and invariants — how do you choose boundaries?",
+      "answer": "An aggregate enforces invariants in a single transaction. Group entities that must change together; keep aggregates small and reference others by ID. Cross-aggregate invariants require sagas.",
+      "tags": ["Architecture","DDD","Consistency"]
+    },
+    {
+      "question": "Client-side vs server-side service discovery — trade-offs?",
+      "answer": "Client-side (apps pick instances via registry) removes a hop and enables smart client logic; harder to rotate clients. Server-side (LB/proxy picks) centralizes policy/MTLS and is simpler for clients; adds a hop.",
+      "tags": ["Architecture","Networking","Discovery"]
+    },
+    {
+      "question": "Sidecar & Service Mesh — when to adopt vs keep libraries?",
+      "answer": "Service mesh (Envoy/Istio/Linkerd) offloads MTLS, retries, timeouts, and telemetry to sidecars. Adopt when you need uniform policy across many services. Stick to libs when the fleet is small and ops simplicity matters.",
+      "tags": ["Architecture","Networking","Reliability"]
+    },
+    {
+      "question": "GraphQL Federation vs single schema vs REST aggregator?",
+      "answer": "Single GraphQL schema is simplest but centralizes ownership. Federation lets teams own subgraphs and compose a gateway. REST aggregator composes JSON from multiple services. Federation adds schema governance and resolver performance concerns.",
+      "tags": ["API","GraphQL","Architecture"]
+    },
+    {
+      "question": "Async request–reply over messaging — how to design it?",
+      "answer": "Correlate with a request ID, include reply-to topic/queue, set a timeout/TTL, dedupe responses, and define idempotent handlers. Use a saga or workflow if multiple steps must succeed or compensate.",
+      "tags": ["Messaging","Pattern","Reliability"]
+    },
+    {
+      "question": "Replaying and reprocessing events safely?",
+      "answer": "Make consumers idempotent, keep versioned projections, use checkpoints per consumer group, and support backfill windows. Guard side effects (emails/payments) behind outboxes or feature flags during replay.",
+      "tags": ["EventSourcing","Reliability","Operations"]
+    },
+    {
+      "question": "Anti-entropy & reconciliation — how to fix drift?",
+      "answer": "Periodic jobs compare authoritative sources (checksums/hashes), enqueue fixes, and emit audit logs. Use reconciliation topics, tombstones for deletes, and metrics to track drift rate.",
+      "tags": ["Consistency","Operations","Reliability"]
+    },
+    {
+      "question": "2PC vs Sagas — why is 2PC rare at scale?",
+      "answer": "2PC requires a coordinator and locks, hurting availability and throughput. Sagas favor availability with compensations and retries. Use 2PC only within a single tech boundary that natively supports it (e.g., one DB cluster).",
+      "tags": ["Consistency","Transactions","Architecture"]
+    },
+    {
+      "question": "Lambda vs Kappa architectures (data pipelines)?",
+      "answer": "Lambda splits batch and streaming paths (complex but flexible). Kappa uses a single stream (append-only log) for both real-time and reprocessing. Choose Kappa when a durable log (Kafka) is the source of truth.",
+      "tags": ["Data","Streaming","Architecture"]
+    },
+    {
+      "question": "Ordering and out-of-order events — practical handling?",
+      "answer": "Partition by key to keep per-key order, use event-time with watermarks and allowed lateness, and design idempotent updates. For cross-key order, store sequence numbers and reconcile asynchronously.",
+      "tags": ["Messaging","Streaming","Reliability"]
+    },
+    {
+      "question": "Command bus pattern — why and how?",
+      "answer": "Centralizes command handling: validation, auth, idempotency keys, routing to handlers, and metrics. Enables cross-cutting concerns and consistent retries. Keep handlers thin and side-effect boundaries explicit.",
+      "tags": ["Architecture","Pattern","CQRS"]
+    },
+    {
+      "question": "Embedding vs referencing in document databases?",
+      "answer": "Embed when data is read together and small/immutable; reference when shared across many parents, large, or updated independently. Watch document size limits and write amplification.",
+      "tags": ["Database","Modeling","Architecture"]
+    }
+  ]
 }
+
+
+
+
+
+

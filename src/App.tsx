@@ -7,6 +7,7 @@ import DeckNav from './components/DeckNav'
 import frontend from "../src/decks/frontend.json"
 import backend from "../src/decks/backend.json"
 import systemDesign from "../src/decks/system-design.json"
+import architecturePatterns from "../src/decks/architecture-patterns.json"
 
 // types
 type Card = { question: string; answer: string; tags?: string[] }
@@ -16,16 +17,18 @@ const DECKS = {
   frontend,
   backend,
   systemDesign,
+  architecturePatterns,
 } satisfies Record<string, Deck>
 
 type DeckId = keyof typeof DECKS
 
-const ORDER: DeckId[] = ['frontend', 'backend', 'systemDesign']
+const ORDER: DeckId[] = ['frontend', 'backend', 'systemDesign', 'architecturePatterns']
 
 const LABEL: Record<DeckId, string> = {
   frontend: 'Front-end',
   backend: 'Back-end',
   systemDesign: 'System Design',
+  architecturePatterns: 'Architecture Patterns',
 }
 
 function App() {
