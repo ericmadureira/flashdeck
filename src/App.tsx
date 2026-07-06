@@ -8,12 +8,14 @@ import frontend from "../src/decks/frontend.json"
 import backend from "../src/decks/backend.json"
 import systemDesign from "../src/decks/system-design.json"
 import architecturePatterns from "../src/decks/architecture-patterns.json"
+import typescript from "../src/decks/typescript.json"
 
 // types
 type Card = { question: string; answer: string; tags?: string[] }
 type Deck = { title?: string; cards: Card[] }
 
 const DECKS = {
+  typescript,
   frontend,
   backend,
   systemDesign,
@@ -22,9 +24,10 @@ const DECKS = {
 
 type DeckId = keyof typeof DECKS
 
-const ORDER: DeckId[] = ['frontend', 'backend', 'systemDesign', 'architecturePatterns']
+const ORDER: DeckId[] = ['typescript', 'frontend', 'backend', 'systemDesign', 'architecturePatterns']
 
 const LABEL: Record<DeckId, string> = {
+  typescript: 'TypeScript',
   frontend: 'Front-end',
   backend: 'Back-end',
   systemDesign: 'System Design',
@@ -32,7 +35,7 @@ const LABEL: Record<DeckId, string> = {
 }
 
 function App() {
-  	const [deckId, setDeckId] = useState<DeckId>('frontend')
+  	const [deckId, setDeckId] = useState<DeckId>('typescript')
 	const [cardIdx, setCardIdx] = useState(0)
 
 	let currentDeck = DECKS[deckId]

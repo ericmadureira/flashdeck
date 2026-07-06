@@ -1,0 +1,276 @@
+{
+  "id": "typescript",
+  "title": "TypeScript Interview Prep",
+  "cards": [
+    {
+      "question": "Why use TypeScript instead of plain JavaScript?",
+      "answer": "TypeScript adds static type checking, better editor support, safer refactors, and clearer contracts between parts of the codebase. It helps catch mistakes before runtime.",
+      "tags": ["Technical", "TypeScript", "Basics", "InterviewCore"]
+    },
+    {
+      "question": "What is the difference between TypeScript at compile time and JavaScript at runtime?",
+      "answer": "TypeScript types exist only during development and compilation. They are erased from the emitted JavaScript, so runtime behavior is still just JavaScript unless you add runtime validation yourself.",
+      "tags": ["Technical", "TypeScript", "Basics", "InterviewCore"]
+    },
+    {
+      "question": "What is the difference between type inference and explicit typing?",
+      "answer": "Inference means TypeScript figures out the type from the value or context. Explicit typing means you write the type annotation yourself. Use inference by default and explicit types when it improves clarity or constrains APIs.",
+      "tags": ["Technical", "TypeScript", "Basics"]
+    },
+    {
+      "question": "What is the difference between any, unknown, and never?",
+      "answer": "any disables type safety. unknown is a safe top type that requires narrowing before use. never means a value should not exist, such as a function that always throws or an exhaustive switch default that should be unreachable.",
+      "tags": ["Technical", "TypeScript", "Basics", "InterviewCore"]
+    },
+    {
+      "question": "When should you use unknown instead of any?",
+      "answer": "Use unknown when the value can be anything but you still want safety. It forces you to validate or narrow the value before accessing properties or calling methods.",
+      "tags": ["Technical", "TypeScript", "Basics", "Safety"]
+    },
+    {
+      "question": "What is a union type?",
+      "answer": "A union allows a value to be one of several types, such as string | number. You usually narrow the union before using members specific to one branch.",
+      "tags": ["Technical", "TypeScript", "Basics"]
+    },
+    {
+      "question": "What is an intersection type?",
+      "answer": "An intersection combines multiple types into one, such as A & B. The resulting type must satisfy all parts at once.",
+      "tags": ["Technical", "TypeScript", "Basics"]
+    },
+    {
+      "question": "How does optional property syntax work?",
+      "answer": "A property like name?: string means the property may be missing. If present, it must be a string. It does not mean the property is always there with value undefined.",
+      "tags": ["Technical", "TypeScript", "Basics", "Objects"]
+    },
+    {
+      "question": "What is the difference between foo?: string and foo: string | undefined?",
+      "answer": "foo?: string means the property may be absent entirely. foo: string | undefined means the property must exist, but its value can be undefined.",
+      "tags": ["Technical", "TypeScript", "Basics", "Objects", "InterviewCore"]
+    },
+    {
+      "question": "What is type narrowing?",
+      "answer": "Type narrowing is how TypeScript refines a broader type into a more specific one using checks like typeof, instanceof, in, equality checks, truthiness, or custom type guards.",
+      "tags": ["Technical", "TypeScript", "Basics", "InterviewCore"]
+    },
+    {
+      "question": "How does typeof help with narrowing?",
+      "answer": "typeof checks primitive runtime categories like string, number, boolean, bigint, symbol, undefined, and function. Inside the matching branch, TypeScript narrows the variable accordingly.",
+      "tags": ["Technical", "TypeScript", "Basics", "Narrowing"]
+    },
+    {
+      "question": "What does the in operator do in a type guard?",
+      "answer": "The in operator checks whether a property exists on an object. TypeScript can use that check to narrow unions of object shapes.",
+      "tags": ["Technical", "TypeScript", "Basics", "Narrowing"]
+    },
+    {
+      "question": "What is a custom type guard?",
+      "answer": "A custom type guard is a function returning a predicate like value is User. It tells TypeScript that when the function returns true, the value should be treated as that specific type.",
+      "tags": ["Technical", "TypeScript", "Intermediate", "Narrowing", "InterviewCore"]
+    },
+    {
+      "question": "Why is Array.isArray more useful than checking typeof for arrays?",
+      "answer": "typeof [] returns object, so it cannot distinguish arrays. Array.isArray is the correct runtime check and TypeScript also uses it for narrowing.",
+      "tags": ["Technical", "TypeScript", "Basics", "Narrowing"]
+    },
+    {
+      "question": "What is the difference between interface and type alias?",
+      "answer": "Interfaces are great for object shapes and support declaration merging. Type aliases are more flexible because they can represent unions, intersections, primitives, tuples, and mapped types. In practice both are useful, but types are broader.",
+      "tags": ["Technical", "TypeScript", "Intermediate", "InterviewCore"]
+    },
+    {
+      "question": "What is declaration merging?",
+      "answer": "Declaration merging is when TypeScript combines multiple declarations with the same name, commonly with interfaces or namespaces, into a single combined definition.",
+      "tags": ["Technical", "TypeScript", "Intermediate"]
+    },
+    {
+      "question": "When should you reach for readonly?",
+      "answer": "Use readonly when a property or array should not be reassigned after creation. It expresses intent and prevents accidental mutation through that reference.",
+      "tags": ["Technical", "TypeScript", "Basics", "Objects"]
+    },
+    {
+      "question": "What is the difference between readonly T[] and ReadonlyArray<T>?",
+      "answer": "They mean the same thing. Both describe an array that cannot be mutated through that reference.",
+      "tags": ["Technical", "TypeScript", "Basics", "Arrays"]
+    },
+    {
+      "question": "What problem do tuples solve?",
+      "answer": "Tuples model fixed-length arrays where each position has a known type, such as [string, number]. They are useful when order matters and each element has a different meaning.",
+      "tags": ["Technical", "TypeScript", "Basics", "Arrays"]
+    },
+    {
+      "question": "How do enums compare with union literals?",
+      "answer": "Union literals are usually lighter and compose better with modern TypeScript. Enums emit runtime objects unless you use const enums, so many teams prefer unions like 'idle' | 'loading' | 'success'.",
+      "tags": ["Technical", "TypeScript", "Intermediate", "Modeling", "InterviewCore"]
+    },
+    {
+      "question": "What is a literal type?",
+      "answer": "A literal type is an exact value type like 'GET', 200, or true. They are useful for precise APIs and discriminated unions.",
+      "tags": ["Technical", "TypeScript", "Basics", "Modeling"]
+    },
+    {
+      "question": "What is a discriminated union?",
+      "answer": "A discriminated union is a union of object types that all share a common literal property like kind or type. Checking that property lets TypeScript safely narrow each branch and enables exhaustive handling.",
+      "tags": ["Technical", "TypeScript", "Intermediate", "Modeling", "InterviewCore"]
+    },
+    {
+      "question": "How do you enforce exhaustiveness in a switch over a discriminated union?",
+      "answer": "Handle each case and assign the default branch to a variable of type never. If a new case is added and not handled, TypeScript will error.",
+      "tags": ["Technical", "TypeScript", "Intermediate", "Modeling", "InterviewCore"]
+    },
+    {
+      "question": "What are generics and why are they important?",
+      "answer": "Generics let you write reusable functions, classes, and types while preserving information about the concrete type. They avoid duplication and keep APIs type-safe across many input shapes.",
+      "tags": ["Technical", "TypeScript", "Intermediate", "Generics", "InterviewCore"]
+    },
+    {
+      "question": "When is a generic unnecessary?",
+      "answer": "A generic is unnecessary when the type parameter appears only once or does not relate input and output types. In that case, a concrete type or union is usually clearer.",
+      "tags": ["Technical", "TypeScript", "Intermediate", "Generics"]
+    },
+    {
+      "question": "What does extends mean in a generic constraint?",
+      "answer": "It limits a type parameter to types assignable to some base shape, like T extends { id: string }. That way the generic can safely use the constrained members.",
+      "tags": ["Technical", "TypeScript", "Intermediate", "Generics"]
+    },
+    {
+      "question": "How does keyof work?",
+      "answer": "keyof produces a union of property names from a type. For example, keyof User might be 'id' | 'name'. It is often paired with indexed access and mapped types.",
+      "tags": ["Technical", "TypeScript", "Intermediate", "TypeOperators", "InterviewCore"]
+    },
+    {
+      "question": "What is indexed access typing?",
+      "answer": "Indexed access lets you read a property type from another type, such as User['name'] or T[K]. It is useful for reusable helpers and strongly typed APIs.",
+      "tags": ["Technical", "TypeScript", "Intermediate", "TypeOperators"]
+    },
+    {
+      "question": "What are mapped types?",
+      "answer": "Mapped types transform one type into another by iterating over keys, such as { [K in keyof T]?: T[K] }. Built-in helpers like Partial and Readonly use this pattern.",
+      "tags": ["Technical", "TypeScript", "Advanced", "TypeOperators", "InterviewCore"]
+    },
+    {
+      "question": "What are conditional types?",
+      "answer": "Conditional types choose one type or another based on assignability, using syntax like T extends U ? X : Y. They power many advanced utility types.",
+      "tags": ["Technical", "TypeScript", "Advanced", "TypeOperators", "InterviewCore"]
+    },
+    {
+      "question": "What does infer do in conditional types?",
+      "answer": "infer captures part of a type so you can reuse it in the true branch of a conditional type, such as extracting a function return type or array element type.",
+      "tags": ["Technical", "TypeScript", "Advanced", "TypeOperators"]
+    },
+    {
+      "question": "Why does conditional typing distribute over unions sometimes?",
+      "answer": "A conditional type like T extends X ? A : B distributes when T is a naked type parameter. That means each union member is evaluated separately. Wrapping T in a tuple like [T] can prevent distribution.",
+      "tags": ["Technical", "TypeScript", "Advanced", "TypeOperators"]
+    },
+    {
+      "question": "What is the difference between Partial<T>, Required<T>, Pick<T, K>, and Omit<T, K>?",
+      "answer": "Partial makes all properties optional. Required makes them all required. Pick selects a subset of keys. Omit removes a subset of keys. These are foundational utility types for shaping APIs.",
+      "tags": ["Technical", "TypeScript", "Intermediate", "Utilities", "InterviewCore"]
+    },
+    {
+      "question": "What do Record<K, V> and ReturnType<T> do?",
+      "answer": "Record creates an object type with keys K and values V. ReturnType extracts the return type of a function type. Both are common utilities in real projects.",
+      "tags": ["Technical", "TypeScript", "Intermediate", "Utilities"]
+    },
+    {
+      "question": "What is the non-null assertion operator and why should it be used carefully?",
+      "answer": "The exclamation mark after a value, like foo!, tells TypeScript to trust that it is not null or undefined. It bypasses safety checks, so overusing it can hide real bugs.",
+      "tags": ["Technical", "TypeScript", "Intermediate", "Safety", "InterviewCore"]
+    },
+    {
+      "question": "What does as const do?",
+      "answer": "as const tells TypeScript to keep literal values narrow and mark object properties and array entries readonly. It is helpful for configuration objects and discriminated unions.",
+      "tags": ["Technical", "TypeScript", "Intermediate", "Modeling"]
+    },
+    {
+      "question": "What problem does the satisfies operator solve?",
+      "answer": "satisfies checks that a value conforms to a target type without widening the value to that type. It is great when you want validation plus precise inference.",
+      "tags": ["Technical", "TypeScript", "Advanced", "Modeling", "InterviewCore"]
+    },
+    {
+      "question": "How is satisfies different from a type annotation?",
+      "answer": "A type annotation changes the variable's type to the annotated one. satisfies only validates compatibility while preserving the narrower inferred type of the value.",
+      "tags": ["Technical", "TypeScript", "Advanced", "Modeling"]
+    },
+    {
+      "question": "What are function overloads and when should you use them?",
+      "answer": "Function overloads describe multiple valid call signatures for one implementation. Use them when callers get meaningfully different return types or parameter patterns and unions alone would be too imprecise.",
+      "tags": ["Technical", "TypeScript", "Advanced", "Functions", "InterviewCore"]
+    },
+    {
+      "question": "Why can overload implementations be tricky?",
+      "answer": "The implementation must handle all overload cases safely, but callers only see the declared overload signatures. If the overload list and implementation drift apart, confusion and unsound behavior follow.",
+      "tags": ["Technical", "TypeScript", "Advanced", "Functions"]
+    },
+    {
+      "question": "How do you type an async function?",
+      "answer": "An async function always returns a Promise, so the type should be Promise<T> for whatever resolved value it yields.",
+      "tags": ["Technical", "TypeScript", "Basics", "Functions"]
+    },
+    {
+      "question": "What does strictNullChecks change?",
+      "answer": "With strictNullChecks enabled, null and undefined are distinct types and must be handled explicitly. This prevents many runtime errors from missing values.",
+      "tags": ["Technical", "TypeScript", "Intermediate", "Safety", "InterviewCore"]
+    },
+    {
+      "question": "What does noImplicitAny protect you from?",
+      "answer": "It prevents parameters, variables, and expressions from silently becoming any when TypeScript cannot infer a type. That keeps holes from spreading through the codebase.",
+      "tags": ["Technical", "TypeScript", "Intermediate", "TsConfig"]
+    },
+    {
+      "question": "Why is strict mode valuable in a TypeScript project?",
+      "answer": "strict turns on a set of stronger safety checks that catch shallow and deep mistakes earlier. It raises the baseline quality of the whole project and makes types more trustworthy.",
+      "tags": ["Technical", "TypeScript", "Intermediate", "TsConfig", "InterviewCore"]
+    },
+    {
+      "question": "What is structural typing?",
+      "answer": "TypeScript compares types by their shape rather than by explicit nominal declarations. If an object has the required members, it is assignable even if it came from a different declared type.",
+      "tags": ["Technical", "TypeScript", "Intermediate", "TypeSystem", "InterviewCore"]
+    },
+    {
+      "question": "What are some risks of structural typing in larger systems?",
+      "answer": "Two values with similar shapes can be assignable even when they represent different concepts. That can cause accidental mixing of domain types unless you add stronger modeling patterns such as branded types.",
+      "tags": ["Technical", "TypeScript", "Advanced", "TypeSystem"]
+    },
+    {
+      "question": "What is a branded type and why might you use one?",
+      "answer": "A branded type adds a nominal-like marker to a structural type, such as UserId versus OrderId when both are strings. It helps prevent mixing semantically different values with the same runtime representation.",
+      "tags": ["Technical", "TypeScript", "Advanced", "TypeSystem", "Modeling"]
+    },
+    {
+      "question": "How should you type external API responses?",
+      "answer": "Treat them as unknown at the boundary, validate them at runtime, and then convert them into trusted internal types. Static types alone do not validate network data.",
+      "tags": ["Technical", "TypeScript", "Intermediate", "Safety", "Architecture", "InterviewCore"]
+    },
+    {
+      "question": "Why can type assertions be dangerous?",
+      "answer": "A type assertion like value as User tells the compiler to trust you without proof. If the runtime value does not match, the code still compiles and may fail later.",
+      "tags": ["Technical", "TypeScript", "Basics", "Safety"]
+    },
+    {
+      "question": "What is the practical difference between casting in TypeScript and casting in languages like Java or C#?",
+      "answer": "TypeScript assertions do not convert runtime values. They only change the compiler's view of the value. In many nominal languages, casts relate to runtime type systems as well.",
+      "tags": ["Technical", "TypeScript", "Intermediate", "TypeSystem"]
+    },
+    {
+      "question": "How would you explain covariance and contravariance at a senior interview level?",
+      "answer": "Variance describes how subtype relationships flow through generic types. Arrays are mostly covariant in TypeScript, which can be risky. Function parameter positions are contravariant under stricter checks, which matters when assigning callbacks.",
+      "tags": ["Technical", "TypeScript", "Advanced", "TypeSystem", "Senior"]
+    },
+    {
+      "question": "What is a common TypeScript pitfall with arrays and object mutation?",
+      "answer": "Typing something safely does not make it immutable at runtime. Shared references can still be mutated unless you design APIs carefully and, when needed, enforce immutability patterns or copies.",
+      "tags": ["Technical", "TypeScript", "Intermediate", "Safety"]
+    },
+    {
+      "question": "How do you keep TypeScript useful instead of over-engineered?",
+      "answer": "Prefer clear domain models, useful strictness, and simple generics over type puzzles. Model the important invariants, but do not build clever types that make the code hard to read or debug.",
+      "tags": ["Technical", "TypeScript", "Senior", "InterviewCore", "Pragmatism"]
+    },
+    {
+      "question": "What would you say if asked about the limits of TypeScript in production systems?",
+      "answer": "TypeScript improves design-time safety, but it does not replace runtime validation, tests, or good architecture. It cannot guarantee correctness for untrusted input, side effects, concurrency, or business logic by itself.",
+      "tags": ["Technical", "TypeScript", "Senior", "Architecture", "InterviewCore"]
+    }
+  ]
+}

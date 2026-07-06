@@ -1,0 +1,21 @@
+{
+	"id": "real-questions",
+	"title": "Full Stack Real",
+	"cards": [
+		{
+			"question": "Explain the modern React component lifecycle without classes.",
+			"answer": "With hooks: mount (useEffect with []), updates (useEffect with deps), unmount (cleanup). Avoid setState in render; use memo/useMemo/useCallback.",
+			"tags": ["Technical", "React"]
+		},
+		{
+			"question": "Difference between state and props in React?",
+			"answer": "Props are read-only inputs from parent; state is internal, owned by the component and updated via setState/useState.",
+			"tags": ["Technical","React"]
+		},
+		{
+			"question": "Why are keys important in React lists?",
+			"answer": "They give stable identity so React can diff/move items instead of recreating; avoid index when list can reorder.",
+			"tags": ["Technical","React"]
+		}
+    ]
+}
