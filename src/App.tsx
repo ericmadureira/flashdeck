@@ -133,7 +133,7 @@ function App() {
   if (ORDER.length === 0) {
     return (
       <div className='flex min-h-screen flex-col items-center justify-center px-6 text-center'>
-        <h1 className='mt-4 text-[#38BDF8]'>FlashDeck</h1>
+        <h1 className='mt-4 text-cyan-300'>FlashDeck</h1>
         <p className='mt-6 max-w-md text-lg'>
           Nenhum deck valido foi encontrado em <code>src/decks</code>.
         </p>
@@ -146,34 +146,60 @@ function App() {
   }
 
   return (
-    <div className='flex flex-col items-center text-center'>
-      <h1 className='mt-4 text-[#38BDF8]'>FlashDeck</h1>
-      <h3>
-        <a
-          href="https://github.com/ericmadureira/flashdeck"
-          target='_blank'
-          className='underline'
-        >
-          by Eric Madureira
-        </a>
-      </h3>
-      <p className='mt-8 text-xl'>Deck:</p>
-      <select
-        value={deckId}
-        onChange={(e: ChangeEvent<HTMLSelectElement>) => setDeckId(e.target.value)}
-      >
-        {ORDER.map(id => (
-          <option key={id} value={id}>
-            {DECKS[id].title}
-            {id === deckId ? ` (${total})` : ''}
-          </option>
-        ))}
-      </select>
-      <DeckNav previousCard={previousCard} nextCard={nextCard} />
-      {currentCard && (
-        <Card key={currentCard.question} question={currentCard.question} answer={currentCard.answer} />
-      )}
-    </div>
+    <main className='mx-auto flex min-h-screen w-full max-w-4xl items-center px-4 py-6 sm:px-6 lg:px-8'>
+      <div className='flashdeck-shell w-full rounded-[2rem] border border-white/10 px-5 py-6 shadow-2xl shadow-black/30 sm:px-8 sm:py-8'>
+        <section className='flex flex-col items-center text-center'>
+          <div className='w-full max-w-md'>
+            <h1 className='text-5xl font-semibold tracking-[-0.04em] text-white sm:text-6xl'>
+              FlashDeck
+            </h1>
+            <a
+              href="https://github.com/ericmadureira/flashdeck"
+              target='_blank'
+              className='mt-3 inline-flex items-center justify-center rounded-full border border-white/12 px-4 py-2 text-sm text-slate-200 transition hover:border-cyan-300/40 hover:text-white'
+            >
+              by Eric Madureira
+            </a>
+          </div>
+
+          <div className='mt-8 w-full max-w-md'>
+            <label
+              htmlFor='deck-select'
+              className='mb-2 block text-xs font-semibold uppercase tracking-[0.28em] text-slate-400'
+            >
+              Escolha um deck
+            </label>
+            <select
+              id='deck-select'
+              className='flashdeck-select w-full'
+              value={deckId}
+              onChange={(e: ChangeEvent<HTMLSelectElement>) => setDeckId(e.target.value)}
+            >
+              {ORDER.map(id => (
+                <option key={id} value={id}>
+                  {DECKS[id].title}
+                  {id === deckId ? ` (${total})` : ''}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <p className='mt-4 text-sm text-slate-400'>
+            Carta {cardIdx + 1} de {total}
+          </p>
+
+          <DeckNav previousCard={previousCard} nextCard={nextCard} />
+
+          {currentCard && (
+            <Card
+              key={currentCard.question}
+              question={currentCard.question}
+              answer={currentCard.answer}
+            />
+          )}
+        </section>
+      </div>
+    </main>
   )
 }
 
