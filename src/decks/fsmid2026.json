@@ -1,0 +1,77 @@
+[
+  {
+    "question": "Como funciona a reconciliação (Reconciliation) do React?",
+    "answer": "A cada mudança de estado, o React cria um novo Virtual DOM, compara com o anterior (diffing) e atualiza apenas os elementos realmente alterados no DOM real, reduzindo custo de renderização.",
+    "tags":["React","Advanced"]
+  },
+  {
+    "question": "O que é Virtual DOM?",
+    "answer": "É uma representação em memória do DOM real. O React compara versões do Virtual DOM antes de atualizar o navegador, tornando as renderizações mais eficientes.",
+    "tags":["React","Advanced"]
+  },
+  {
+    "question": "Por que as keys são importantes em listas?",
+    "answer": "Keys identificam cada elemento durante a reconciliação. Chaves estáveis evitam renderizações incorretas, perda de estado e melhoram a performance das atualizações.",
+    "tags":["React"]
+  },
+  {
+    "question": "Quando usar React.memo?",
+    "answer": "Quando um componente recebe as mesmas props frequentemente. O React.memo evita renderizações desnecessárias comparando as props anteriores com as atuais.",
+    "tags":["React"]
+  },
+  {
+    "question": "Quando useMemo realmente faz sentido?",
+    "answer": "Para memorizar cálculos pesados ou valores derivados caros. Não deve ser usado em tudo, pois também possui custo de gerenciamento.",
+    "tags":["React"]
+  },
+  {
+    "question": "Quando useCallback realmente faz sentido?",
+    "answer": "Quando callbacks são passados para componentes memoizados ou dependências de hooks. Evita recriar funções sem necessidade.",
+    "tags":["React"]
+  },
+  {
+    "question": "Como evitar renderizações desnecessárias?",
+    "answer": "Dividindo componentes, usando React.memo quando necessário, memorizando callbacks e evitando estados maiores do que o necessário.",
+    "tags":["React"]
+  },
+  {
+    "question": "Controlled vs Uncontrolled Components?",
+    "answer": "Controlled Components têm seu valor controlado pelo estado do React. Uncontrolled Components deixam o DOM controlar os valores usando refs.",
+    "tags":["React"]
+  },
+  {
+    "question": "Quando Context API não é uma boa escolha?",
+    "answer": "Quando estados mudam com muita frequência ou a aplicação cresce bastante. Atualizações no Context podem renderizar muitos componentes desnecessariamente.",
+    "tags":["React"]
+  },
+  {
+    "question": "Como melhorar a organização de componentes grandes?",
+    "answer": "Separando lógica em Custom Hooks, quebrando componentes em partes menores, extraindo funções auxiliares e mantendo cada componente com uma única responsabilidade.",
+    "tags":["React"]
+  },
+  {
+    "question": "O que são Server Components?",
+    "answer": "Executam no servidor e enviam HTML pronto ao cliente. Reduzem JavaScript baixado e melhoram performance, mas não podem usar hooks de estado nem eventos.",
+    "tags":["NextJS"]
+  },
+  {
+    "question": "Quando usar Client Components?",
+    "answer": "Quando há necessidade de estado, eventos, hooks, acesso ao navegador ou interatividade com o usuário.",
+    "tags":["NextJS"]
+  },
+  {
+    "question": "Quando escolher SSR, SSG ou CSR?",
+    "answer": "SSR para dados dinâmicos e SEO; SSG para conteúdo estático; CSR para aplicações altamente interativas onde SEO não é prioridade.",
+    "tags":["NextJS"]
+  },
+  {
+    "question": "Buffer vs Stream: qual a principal diferença?",
+    "answer": "Buffer carrega todo o arquivo na memória antes de processar. Stream processa em partes, consumindo menos memória e sendo ideal para arquivos grandes.",
+    "tags":["Node"]
+  },
+  {
+    "question": "Quais serviços AWS você conhece para aplicações Node?",
+    "answer": "Lambda para funções serverless, S3 para armazenamento, API Gateway para exposição de APIs e CloudWatch para logs e monitoramento. Mesmo sem experiência profunda, entendo o papel de cada serviço.",
+    "tags":["AWS"]
+  }
+]
